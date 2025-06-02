@@ -17,14 +17,20 @@ const authMiddle = (req, res, next) => {
         if (!token) {
             return res.status(401).json({ message: "Unauthorized - No token provided" });
         }
-        const verify = (0, jwt_1.verifyIn)(token);
-        if (!verify) {
-            return res.status(401).json({ message: "Token verification failed" });
+        try {
+            const verify = (0, jwt_1.verifyIn)(token);
+            if (!verify) {
+                return res.status(401).json({ message: "Token verification failed" });
+            }
+            // Properly set user ID on request object
+            //@ts-ignore
+            req.id = verify.user_id;
+            next();
         }
-        // Properly set user ID on request object
-        //@ts-ignore
-        req.id = verify.user_id;
-        return next();
+        catch (verifyError) {
+            console.error("Token verification error:", verifyError);
+            return res.status(401).json({ message: "Invalid token" });
+        }
     }
     catch (e) {
         return res.status(401).json({ message: "Authentication failed" });
