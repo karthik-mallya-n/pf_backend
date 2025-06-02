@@ -11,9 +11,7 @@ dotenv.config();
 const app = express();
 app.use(express.json());
 app.use(cookieParser());
-app.use(cors({
-    credentials : true
-}))
+app.use(cors())
 app.use('/api/auth', Authrouter);
 app.use('/api/transactions', (req, res, next) => { authMiddle(req, res, next); }, TransRouter);
 
