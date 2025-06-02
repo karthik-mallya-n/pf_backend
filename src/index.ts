@@ -19,6 +19,11 @@ app.use(cors({
   allowedHeaders: ["Content-Type", "Authorization", "X-Requested-With"], // Allowed headers
   exposedHeaders: ["Content-Length", "X-Confirm-Delete"] // Headers client can read
 }));
+app.get('/', (req,res)=>{
+  res.status(200).json({
+    "Message" : "Personal Finace is Working"
+  })
+})
 app.use('/api/auth', Authrouter);
 
 app.use('/api/transactions', (req, res, next) => {

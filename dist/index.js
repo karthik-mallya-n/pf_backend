@@ -15,12 +15,17 @@ const app = (0, express_1.default)();
 app.use(express_1.default.json());
 app.use((0, cookie_parser_1.default)());
 app.use((0, cors_1.default)({
-    origin: ["http://localhost:3000", "http://127.0.0.1:3000"], // Frontend URLs
+    origin: ["http://localhost:3000", "http://127.0.0.1:3000", "https://pf-frontend-izwe.onrender.com"], // Frontend URLs
     credentials: true, // Allow credentials (cookies)
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"], // Include OPTIONS for preflight
     allowedHeaders: ["Content-Type", "Authorization", "X-Requested-With"], // Allowed headers
     exposedHeaders: ["Content-Length", "X-Confirm-Delete"] // Headers client can read
 }));
+app.get('/', (req, res) => {
+    res.status(200).json({
+        "Message": "Personal Finace is Working"
+    });
+});
 app.use('/api/auth', auth_routes_1.default);
 app.use('/api/transactions', (req, res, next) => {
     try {
