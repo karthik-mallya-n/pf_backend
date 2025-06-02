@@ -14,7 +14,6 @@ dotenv_1.default.config();
 const app = (0, express_1.default)();
 app.use(express_1.default.json());
 app.use((0, cookie_parser_1.default)());
-// More flexible CORS configuration
 app.use((0, cors_1.default)({
     origin: ["http://localhost:3000", "http://127.0.0.1:3000"], // Frontend URLs
     credentials: true, // Allow credentials (cookies)
@@ -23,7 +22,6 @@ app.use((0, cors_1.default)({
     exposedHeaders: ["Content-Length", "X-Confirm-Delete"] // Headers client can read
 }));
 app.use('/api/auth', auth_routes_1.default);
-// Improved auth middleware handling
 app.use('/api/transactions', (req, res, next) => {
     try {
         (0, auth_middleware_1.authMiddle)(req, res, next);

@@ -13,7 +13,7 @@ app.use(express.json());
 app.use(cookieParser());
 
 app.use(cors({
-  origin: ["http://localhost:3000", "http://127.0.0.1:3000"], // Frontend URLs
+  origin: ["http://localhost:3000", "http://127.0.0.1:3000","https://pf-frontend-izwe.onrender.com"], // Frontend URLs
   credentials: true, // Allow credentials (cookies)
   methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"], // Include OPTIONS for preflight
   allowedHeaders: ["Content-Type", "Authorization", "X-Requested-With"], // Allowed headers
